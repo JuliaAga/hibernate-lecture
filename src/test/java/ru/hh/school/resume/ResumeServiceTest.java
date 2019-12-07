@@ -41,7 +41,8 @@ public class ResumeServiceTest {
         );
 
         if (embeddedPostgres != null) {
-            TestHelper.executeScript(embeddedPostgres.getPostgresDatabase(), "create_resume.sql");
+            TestHelper.executeScript(embeddedPostgres.getPostgresDatabase(), "create_tables.sql");
+            TestHelper.executeScript(embeddedPostgres.getPostgresDatabase(), "insert_hhusers.sql");
         }
     }
 
@@ -69,40 +70,40 @@ public class ResumeServiceTest {
 
     @Test
     public void saveNewResumeShouldInsertDbRow() {
-//        Resume resume = new Resume();
-//        resume.setUserId(1);
-//        resume.setDescription("description");
-//        resumeService.saveNew(resume);
-//
-//        Optional<Resume> result = resumeService.getBy(resume.getId());
-//        assertTrue(result.isPresent());
-//        assertEquals(resume, result.get());
+        Resume resume = new Resume();
+        resume.setUserId(1);
+        resume.setDescription("description");
+        resumeService.saveNew(resume);
+
+        Optional<Resume> result = resumeService.getBy(resume.getId());
+        assertTrue(result.isPresent());
+        assertEquals(resume, result.get());
     }
 
     @Test
     public void shouldGetOnlyActiveResunesForUser() {
-//        Resume resume1 = new Resume();
-//        resume1.setUserId(1);
-//        resume1.setActive(true);
-//        resume1.setDescription("its me!");
-//        resumeService.saveNew(resume1);
-//
-//        Resume resume2 = new Resume();
-//        resume2.setUserId(1);
-//        resume2.setActive(false);
-//        resume2.setDescription("im not active");
-//        resumeService.saveNew(resume2);
-//
-//        Resume resume3 = new Resume();
-//        resume3.setUserId(2);
-//        resume2.setActive(true);
-//        resume1.setDescription("im for another user");
-//        resumeService.saveNew(resume3);
-//
-//        Set<Resume> activeResumesForUserId = resumeService.getActiveResumesForUserId(1);
-//
-//        assertEquals(1, activeResumesForUserId.size());
-//        assertTrue(activeResumesForUserId.stream().anyMatch(r -> r.getDescription().equals("its me!")));
+        Resume resume1 = new Resume();
+        resume1.setUserId(1);
+        resume1.setActive(true);
+        resume1.setDescription("its me!");
+        resumeService.saveNew(resume1);
+
+        Resume resume2 = new Resume();
+        resume2.setUserId(1);
+        resume2.setActive(false);
+        resume2.setDescription("im not active");
+        resumeService.saveNew(resume2);
+
+        Resume resume3 = new Resume();
+        resume3.setUserId(2);
+        resume2.setActive(true);
+        resume1.setDescription("im for another user");
+        resumeService.saveNew(resume3);
+
+        Set<Resume> activeResumesForUserId = resumeService.getActiveResumesForUserId(1);
+
+        assertEquals(1, activeResumesForUserId.size());
+        assertTrue(activeResumesForUserId.stream().anyMatch(r -> r.getDescription().equals("its me!")));
     }
 
 }

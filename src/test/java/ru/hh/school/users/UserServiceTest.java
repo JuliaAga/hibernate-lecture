@@ -48,7 +48,7 @@ public class UserServiceTest {
         );
 
         if (embeddedPostgres != null) {
-            TestHelper.executeScript(embeddedPostgres.getPostgresDatabase(), "create_hhuser.sql");
+            TestHelper.executeScript(embeddedPostgres.getPostgresDatabase(), "create_tables.sql");
         }
     }
 

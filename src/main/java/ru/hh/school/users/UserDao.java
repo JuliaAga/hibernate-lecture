@@ -3,6 +3,7 @@ package ru.hh.school.users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,12 +16,11 @@ public class UserDao {
     }
 
     public Set<User> getAll() {
-        //TODO: implement
-        return null;
+        return new HashSet<>(session().createQuery("from User",User.class).list());
     }
 
     public void saveNew(User user) {
-        //TODO: implement
+        session().persist(user);
     }
 
     public Optional<User> getBy(int id) {
@@ -49,7 +49,7 @@ public class UserDao {
     }
 
     public void update(User user) {
-        //TODO: implement
+        session().update(user);
     }
 
     private Session session() {
